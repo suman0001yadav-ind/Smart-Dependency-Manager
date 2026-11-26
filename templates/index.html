@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Dependency Manager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">SD</div><div><b>SmartFlow</b><small>DEPENDENCY MANAGER</small></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <a class="nav active" href="#overview">▦ <span>Overview</span></a>
+    <a class="nav" href="#tasks">☷ <span>Tasks & dependencies</span></a>
+    <a class="nav" href="#algorithms">⌘ <span>Algorithms</span></a>
+    <a class="nav" href="#performance">▥ <span>Performance</span></a>
+    <div class="sidebar-bottom"><div class="status-dot"></div><span>Local project workspace</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">PROJECT WORKSPACE / OVERVIEW</div><h1>Dependency dashboard</h1><p class="muted">Plan tasks, validate dependencies, and generate execution order.</p></div>
+      <div class="top-right"><span class="live"><i></i> SYSTEM ONLINE</span><div class="avatar">SK</div></div>
+    </header>
+
+    <section class="stats" id="overview">
+      <article class="stat-card"><div class="stat-top"><span>Total tasks</span><span class="stat-icon blue">▦</span></div><strong id="taskCount">0</strong><small>Tasks in your project graph</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Dependencies</span><span class="stat-icon purple">↗</span></div><strong id="dependencyCount">0</strong><small>Directed task connections</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Graph status</span><span class="stat-icon green">✓</span></div><strong class="status-text" id="graphStatus">Checking</strong><small id="graphHint">Cycle validation</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Algorithms</span><span class="stat-icon orange">⌘</span></div><strong>02</strong><small>BFS and DFS available</small></article>
+    </section>
+
+    <section class="content-grid" id="tasks">
+      <article class="panel">
+        <div class="panel-heading"><div><h2>Task management</h2><p class="muted">Create tasks and define prerequisite relationships.</p></div><span class="pill">JSON SAVED</span></div>
+        <form id="taskForm" class="inline-form"><input id="taskInput" placeholder="e.g. Design website" maxlength="80" required><button class="btn primary" type="submit">＋ Add task</button></form>
+        <div class="section-label">ADD DEPENDENCY</div>
+        <form id="dependencyForm" class="dependency-form">
+          <label>Prerequisite<select id="prerequisite" required><option value="">Select task</option></select></label>
+          <span class="arrow">→</span>
+          <label>Dependent task<select id="dependent" required><option value="">Select task</option></select></label>
+          <button class="btn dark" type="submit">Connect</button>
+        </form>
+        <div class="section-label list-title">YOUR TASKS <span id="taskListCount">0 TASKS</span></div>
+        <div id="taskList" class="task-list"><div class="empty">No tasks yet. Add your first task above.</div></div>
+      </article>
+
+      <article class="panel graph-panel">
+        <div class="panel-heading"><div><h2>Dependency graph</h2><p class="muted">Arrows show prerequisite → dependent task.</p></div><span class="pill">LIVE GRAPH</span></div>
+        <div id="graphCanvas" class="graph-canvas"><div class="empty">Add tasks to see your graph.</div></div>
+        <div class="legend"><span><i class="legend-node"></i> Task</span><span><i class="legend-line"></i> Dependency</span></div>
+      </article>
+    </section>
+
+    <section class="content-grid lower" id="algorithms">
+      <article class="panel">
+        <div class="panel-heading"><div><h2>Execution order</h2><p class="muted">Run a topological sort on the current graph.</p></div></div>
+        <div class="algorithm-actions"><button class="btn primary" id="runBfs">Run BFS · Kahn</button><button class="btn secondary" id="runDfs">Run DFS</button><button class="btn outline" id="checkCycle">Check cycle</button></div>
+        <div id="orderResult" class="result-box"><span class="muted">Choose an algorithm to generate the execution order.</span></div>
+      </article>
+      <article class="panel" id="performance">
+        <div class="panel-heading"><div><h2>Algorithm performance</h2><p class="muted">Execution time for different graph sizes.</p></div><button class="btn small outline" id="runBenchmark">Run benchmark</button></div>
+        <div id="benchmarkResult" class="benchmark-result"><div class="empty">Run the benchmark to compare BFS and DFS.</div></div>
+        <p class="footnote">Times vary by computer and graph structure. Both algorithms have O(V + E) time complexity.</p>
+      </article>
+    </section>
+    <footer>SMARTFLOW <span>Built with Python · Flask · Graph Algorithms</span></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

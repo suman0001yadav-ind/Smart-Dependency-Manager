@@ -1,0 +1,19 @@
+SMART DEPENDENCY MANAGER - WEB FRONTEND SETUP
+
+1. Copy app.py into the main Smart-Dependency-Manager folder.
+2. Copy the templates folder and static folder into that same folder.
+3. Replace requirements.txt with the supplied requirements.txt.
+4. Open VS Code terminal in the main project folder.
+5. Install Flask:
+      py -m pip install -r requirements.txt
+6. Start the website:
+      py app.py
+7. Open this address in your browser:
+      http://127.0.0.1:5000
+
+IMPORTANT:
+- Keep your existing task_manager.py, main.py, benchmark.py and tasks.json.
+- Do not run main.py to start the website. Run app.py.
+- The website uses your existing TaskManager class and JSON file.
+- The graph shown in the browser is a visual layout of the current task dependencies.
+- Benchmark values are measured on your computer and may vary each run.
